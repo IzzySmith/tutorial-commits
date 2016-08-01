@@ -33,8 +33,10 @@
     window.addEventListener('DOMContentLoaded', function() {
       Surfly.init({widgetkey:'b84defc4621441ecae5eb10bdec1cb5a'}, function(init) {
         if (init.success) {
-        // use Surfly API here
-          Surfly.button({chat_box_color: "#87cefa", videochat: false});
+          if (Surfly.currentSession) {
+            // inside the session, hide the get help section
+            document.getElementById('get_help').style.visibility="hidden";
+          }
         }
       });
     });
@@ -170,6 +172,34 @@
             </div>
         </div>
     </div>
+
+    <div class="row" id="get_help"> 
+        <div class="box"> 
+            <div class="col-lg-12"> 
+                <hr> 
+                <!-- textbox get help -->
+                <h2 class="intro-text text-center">Get 
+                    <strong>help</strong> 
+                </h2> 
+                <hr> 
+                    
+                <hr class="visible-xs"> 
+                       <p style="text-align:center;"> Want us to help you design the cake of your dreams? Come chat with us :)</p> 
+	        <div style="text-align:center;"> 
+                        <!-- custom Surfly button -->
+                	<button class="button" id="get_help_button" onclick="sessionStart()"></button>
+		</div> 
+            </div> 
+        </div> 
+    </div>
+
+    <script>
+      function sessionStart() {
+         // starts a session with the specified options
+	 Surfly.session({chat_box_color: "#87cefa", videochat: false}).startLeader();
+      }
+    </script>
+
 
     <footer>
         <div class="container">
