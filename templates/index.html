@@ -187,17 +187,16 @@
                        <p style="text-align:center;"> Want us to help you design the cake of your dreams? Come chat with us :)</p> 
 	        <div style="text-align:center;"> 
                         <!-- custom Surfly button -->
-                	<button class="button" id="get_help_button" onclick="sessionStart()"></button>
+                	<button class="my-custom-button" id="get_help_button" onclick="landing()"></button>
 		</div> 
             </div> 
         </div> 
     </div>
 
     <script>
-      function sessionStart() {
-         // starts a session with the specified options
-	 Surfly.session({chat_box_color: "#87cefa", videochat: false}).startLeader();
-      }
+    function landing(){
+      window.location.href = '/landing_page';
+    }      
     </script>
 
 

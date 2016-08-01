@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!--
+    <meta http-equiv="refresh" content="20;url=https://polite-parliment-37403.herokuapp.com/" />
+    -->
+
+    <title>Landing Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='landing_page_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='button_style.css') }}">
+
+    <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
+	widgetkey:"dd402bb4940b4cf3a855aaa371d11419",
+	drawing_mode: "permanent", // change drawing mode so that the drawings last
+	chat_box_color: "#87cefa", // change color of chat box so that it suits our website's theme
+	theme_font_background: "#87cefa", // change color of button 
+	videochat: false, // remove videochat feature (not needed)
+	//hidden: true, // hide Surfly's default button
+	block_until_agent_joins: false, // remove red banner
+	auto_start: true, // session will start automatically
+	end_of_session_popup_url: "https://young-tundra-78608.herokuapp.com/survey", // display popup survey at the end of the session
+        // session continuation
+	cookie_transfer_enabled: true,
+  	cookie_transfer_proxying: false,
+	blacklist: JSON.stringify([{"pattern": ".*/about.*", "redirect": "https://young-tundra-78608.herokuapp.com/#restricted"}]),
+	QUEUE_METADATA_CALLBACK: new Function('return {"name": '+sessionStorage.getItem('metaName')+',"email": '+sessionStorage.getItem('metaEmail')+'}'),
+	//ui_off: true,
+	};
+	var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
+
+<!--
+	<script>
+	if(!window.__surfly){
+	    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+	    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+	    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+	    $.src="//v2.zopim.com/?40l495kTPWFGA7JFrUDzK03KARqCPsNL";z.t=+new Date;$.
+	    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");  
+	}
+        </script>
+-->
+  </head>
+
+  <body>
+        <a href="{{ url_for('index') }}">
+        <img class="img-logo" src="../static/logo1.png"/>
+        </a>
+        <button class="button" id="id_button" onclick="redirect()">Queue ID</button>
+	<div>
+   	<p class="test">You requested some help. If you are already on the phone with our company, you can pass on the ID you see on this page to the person you are talking to. They will then be able to join you on this session and guide you through the website. Once you have given this ID, you can click on it to be redirected to the home page. </p>
+	<p class="test">If you just want to get some help, you can click the button and wait for an agent to join the session and help you.</p>
+  	</div>
+	
+	<script>
+	function redirect(){
+		window.location.href = '/';
+	}		
+	</script>
+
+        <script>
+	// get session ID
+  	var request = new XMLHttpRequest();
+  	request.open('GET', 'https://api.surfly.com/v2/sessions/?	api_key=33c092b9d4d6425e817f5140447e43da&active_session=true');
+  	request.onreadystatechange = function () {
+    	if (this.readyState === 4) {
+      		if(window.__surfly){
+        		var body = this.responseText;
+        		var index = body.indexOf("session_id");
+        		var index_end = body.indexOf("agent_id");
+        		var id = body.substring(index+13, index_end-3);
+			sessionStorage.setItem("session_id", id);
+     	 	}
+    	}
+  	};
+  	request.send();	
+   	</script>
+
+	<script type="text/javascript">
+ 	// using the REST API to get information about the session
+	var request = new XMLHttpRequest();
+
+	request.open('GET', 'https://api.surfly.com/v2/sessions/?api_key=33c092b9d4d6425e817f5140447e43da&active_session=true');
+
+	request.onreadystatechange = function () {
+	  if (this.readyState === 4) {
+	    if(window.__surfly){
+		    var body = this.responseText; 
+		    // we extract the queue_id from the string we get from the request
+		    var index = body.indexOf("queue_id");
+		    var id = body.substring(index+10, index+14);			
+		    // we display this id on the button
+		    document.getElementById("id_button").innerHTML=id;
+	    }
+	  }
+	};
+
+	request.send();
+	</script>
+
+   </body>
+</html>
+
