@@ -10,6 +10,29 @@
 
     <title>Cake order</title>
 
+    <!-- Surfly widget code -->
+    <script>
+    (function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
+    l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
+    l.src='https://x.zok.pw/new-widget-s1.js';y.parentNode.insertBefore(l,y);})
+    (window,document,'script','Surfly');
+    </script>
+
+    <!-- Surfly init function -->
+    <script>
+   var settings = {widgetkey:'b84defc4621441ecae5eb10bdec1cb5a', end_of_session_popup_url: "https://tranquil-ravine-73076.herokuapp.com/survey"}; 
+    window.addEventListener('DOMContentLoaded', function() {
+      Surfly.init(settings, function(init) {
+        if (init.success) {
+          if (Surfly.currentSession) {
+            // inside the session, hide the get help section
+            document.getElementById('get_help').style.visibility="hidden";
+          }
+        }
+      });
+    });
+    </script>
+
   </head>
 
   <body class="body-style">

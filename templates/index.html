@@ -30,8 +30,9 @@
 
     <!-- Surfly init function -->
     <script>
+   var settings = {widgetkey:'b84defc4621441ecae5eb10bdec1cb5a', end_of_session_popup_url: "https://tranquil-ravine-73076.herokuapp.com/survey"}; 
     window.addEventListener('DOMContentLoaded', function() {
-      Surfly.init({widgetkey:'b84defc4621441ecae5eb10bdec1cb5a'}, function(init) {
+      Surfly.init(settings, function(init) {
         if (init.success) {
           if (Surfly.currentSession) {
             // inside the session, hide the get help section
